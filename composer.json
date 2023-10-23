@@ -4,7 +4,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Rms\\TailcraftInstaller\\": "src/"
+            "RMS\\TailCraftInstaller\\": "src/"
         }
     },
     "authors": [
