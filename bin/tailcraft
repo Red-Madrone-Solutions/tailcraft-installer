@@ -5,14 +5,6 @@ require $_composer_autoload_path
   ?? __DIR__ . '/../vendor/autoload.php'
 ;
 
-use function Laravel\Prompts\text;
-$theme_name = text(
-  label: 'What is the name of your theme?',
-  required: true,
-  validate: fn (string $value) => 
-    preg_match('/[^-\w]/', $value)
-      ? 'The theme name must be just letters, numbers, dash, or underscore'
-      : null
-);
-
+$controller = new RMS\TailCraftInstaller\Controller();
+$controller->run();
 
