@@ -13,7 +13,7 @@ class Setup extends Base {
 
   protected function run() : void
   {
-    // TODO check in theme folder or in WP install
+    // TODO check if in theme folder or in WP install
     $this->getInfo();
     $this->setupTheme();
   }
