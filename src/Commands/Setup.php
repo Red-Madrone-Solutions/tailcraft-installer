@@ -3,7 +3,6 @@
 namespace RMS\TailCraftInstaller\Commands;
 
 use function Laravel\Prompts\text;
-use RMS\TailCraftInstaller\Process\Base as Process;
 use RMS\TailCraftInstaller\Process\GitClone;
 
 class Setup extends Base {
