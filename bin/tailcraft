@@ -6,5 +6,10 @@ require $_composer_autoload_path
 ;
 
 $controller = new RMS\TailCraftInstaller\Controller();
-$controller->run();
+try {
+  $controller->run();
+} catch (\RuntimeException $e) {
+  // TODO Add fallback for short terminals
+  die("Your terminal must be at least 8 lines tall. \nPlease increase the height of your terminal and run the command again.\n");
+}
 
