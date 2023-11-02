@@ -61,7 +61,7 @@ class Setup extends Base {
       hint: 'This will be visible in WordPress admin.',
       required: true,
       validate: fn (string $value) => 
-        preg_match('/[^-\w ]/', $value)
+        preg_match('/[^.-\w ]/', $value)
           ? 'The theme name must be just letters, numbers, dashes, spaces, or underscores'
           : null
     );
@@ -82,7 +82,7 @@ class Setup extends Base {
   protected function asSlug($text) : string
   {
     $slug = strtolower($text);
-    $slug = preg_replace('/\s+/', '-', $slug);
+    $slug = preg_replace('/[.\s]+/', '-', $slug);
     return $slug;
   }
 
