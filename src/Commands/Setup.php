@@ -4,6 +4,7 @@ namespace RMS\TailCraftInstaller\Commands;
 
 use function Laravel\Prompts\text;
 use RMS\TailCraftInstaller\Process\GitClone;
+use RMS\TailCraftInstaller\Util\TextReplace;
 
 class Setup extends Base {
   protected string $theme_name = '';
@@ -22,6 +23,35 @@ class Setup extends Base {
     /* $mkdir = new Process('mkdir', $this->theme_slug); */
     $clone = new GitClone($this->tailcraft_repo, $this->theme_slug);
     $clone();
+    $this->personalizeTheme();
+  }
+
+  protected function personalizeTheme() : void
+  {
+    $var_replacer = new TextReplace('tailcraft_', $this->asVarName($this->theme_slug) . '_');
+    $var_replacer([
+      $this->asPath('functions.php'),
+      $this->asPath('header.php'),
+      $this->asPath('footer.php'),
+      $this->asPath('template-parts/content.php'),
+    ]);
+
+    $slug_replacer = new TextReplace('tailcraft', $this->theme_slug);
+    $slug_replacer([
+      $this->asPath('style.css'),
+      $this->asPath('template-parts/content.php'),
+    ]);
+
+    $name_replacer = new TextReplace('TailCraft Theme', $this->theme_name);
+    $name_replacer([
+      $this->asPath('style.css'),
+    ]);
+  }
+
+  protected function asPath(string $file) : string
+  {
+    // TODO Handle Windows filesystem
+    return $this->theme_slug . '/' . $file;
   }
 
   protected function getInfo() : void
