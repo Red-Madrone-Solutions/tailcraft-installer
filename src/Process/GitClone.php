@@ -4,8 +4,10 @@ namespace RMS\TailCraftInstaller\Process;
 
 use Exception;
 use RMS\TailCraftInstaller\Process\Base;
+use RMS\TailCraftInstaller\Util\DirectoryDelete;
 
 class GitClone extends Base {
+  protected string $destination;
 
   public function __construct(
     string $repo,
@@ -16,6 +18,8 @@ class GitClone extends Base {
       throw new Exception('Unknown service: ' . $service);
     }
 
+    $this->destination = $destination;
+
     $repo_url = 'https://github.com/' . $repo . '.git';
     parent::__construct(
       'git', 
@@ -25,6 +29,13 @@ class GitClone extends Base {
         '--q',
       ]
     );
+  }
+
+  public function cleanup() : void
+  {
+    // Delete .git directory
+    $dir_delete = new DirectoryDelete( $this->destination . '/.git' );
+    $dir_delete();
   }
 }
 
