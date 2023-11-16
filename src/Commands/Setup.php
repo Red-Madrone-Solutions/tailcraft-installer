@@ -23,6 +23,7 @@ class Setup extends Base {
     /* $mkdir = new Process('mkdir', $this->theme_slug); */
     $clone = new GitClone($this->tailcraft_repo, $this->theme_slug);
     $clone();
+    $clone->cleanup();
     $this->personalizeTheme();
   }
 
