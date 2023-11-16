@@ -1,6 +1,7 @@
 {
     "name": "rms/tailcraft-installer",
     "description": "Installer to help with TailCraft WordPress theme.",
+    "version": "0.1.0-dev",
     "type": "project",
     "autoload": {
         "psr-4": {
