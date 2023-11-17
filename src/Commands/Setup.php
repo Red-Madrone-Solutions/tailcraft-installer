@@ -3,6 +3,8 @@
 namespace RMS\TailCraftInstaller\Commands;
 
 use function Laravel\Prompts\text;
+use function RMS\TailCraftInstaller\info;
+
 use RMS\TailCraftInstaller\Process\GitClone;
 use RMS\TailCraftInstaller\Util\TextReplace;
 
@@ -25,6 +27,12 @@ class Setup extends Base {
     $clone();
     $clone->cleanup();
     $this->personalizeTheme();
+    $this->nextSteps();
+  }
+
+  protected function nextSteps() : void
+  {
+    info('Please run `composer install` and `npm install` and `npm run dev` in your new theme directory: ' . $this->theme_slug);
   }
 
   protected function personalizeTheme() : void
