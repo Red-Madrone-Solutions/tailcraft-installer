@@ -42,3 +42,9 @@ For support or more information, please contact:
 Matt Vanderpol  
 Email: matt@redmadronesolutions.com  
 Website: https://mattvanderpol.com
+
+## Acknowledgments
+
+Special thanks to:
+- TailPress for inspiration
+- Laravel Prompts
