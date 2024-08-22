@@ -18,16 +18,8 @@ class InstallBlock extends Base
 
     $block = $options->block();
 
-    $source_dir = $base_source_dir . '/blocks/' . $block;
+    $source_dir = $base_source_dir . '/blocks/' . $block . '/';
     info('source_dir: ' . $source_dir);
-
-    $target_blocks_dir = $base_target_dir . '/blocks';
-    $target_dir = $target_blocks_dir . '/' . $block;
-    info('target_dir: ' . $target_dir);
-
-    if ( !is_dir($target_blocks_dir) ) {
-      mkdir($target_blocks_dir);
-    }
 
     if ( !is_dir($source_dir) ) {
       error( 
@@ -39,6 +31,10 @@ class InstallBlock extends Base
       );
       return;
     }
+
+    $target_blocks_dir = $base_target_dir . '/blocks';
+    $target_dir = $target_blocks_dir . '/' . $block . '/';
+    info('target_dir: ' . $target_dir);
 
     if ( is_dir($target_dir) ) {
       if ( !$options->force() ) {
@@ -57,6 +53,14 @@ class InstallBlock extends Base
           $block
         )
       );
+    }
+
+    if ( !is_dir($target_blocks_dir) ) {
+      mkdir($target_blocks_dir);
+    }
+
+    if ( !is_dir($target_dir) ) {
+      mkdir($target_dir);
     }
 
     $rsync = new Rsync($source_dir, $target_dir);
