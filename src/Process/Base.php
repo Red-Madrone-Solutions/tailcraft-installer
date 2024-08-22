@@ -17,9 +17,9 @@ class Base {
   public function __invoke() : ?int
   {
     $descriptors = [
-      0 => ['pipe', 'r'],
-      1 => ['pipe', 'w'],
-      2 => ['pipe', 'w'],
+      0 => ['pipe', 'r'], // stdin
+      1 => ['pipe', 'w'], // stdout
+      2 => ['pipe', 'w'], // stderr
     ];
 
     $full_command = sprintf('%s %s', $this->command, implode(' ', $this->args));
