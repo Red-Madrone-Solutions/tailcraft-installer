@@ -2,6 +2,8 @@
 
 namespace RMS\TailCraftInstaller\Process;
 
+use function Laravel\Prompts\info;
+
 class Base {
   protected string $command;
   protected array $args;
@@ -25,6 +27,8 @@ class Base {
     $full_command = sprintf('%s %s', $this->command, implode(' ', $this->args));
     $process = proc_open($full_command, $descriptors, $pipes);
     if ( is_resource($process) ) {
+      info( stream_get_contents($pipes[1]) );
+
       fclose($pipes[0]);
       fclose($pipes[1]);
       fclose($pipes[2]);
