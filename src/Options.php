@@ -9,10 +9,11 @@ class Options
   public function __construct()
   {
     $this->options = getopt(
-      'hsi:ll:',
+      'hsi:l::v',
       [ 
         'help', 'setup', 'install:', 'list',
-        'list:',
+        'list:', 
+        'source:', 'target:', 'refresh-libs',
       ]
     );
   }
@@ -30,6 +31,26 @@ class Options
   public function list() : bool
   {
     return isset($this->options['l']) || isset($this->options['list']);
+  }
+
+  public function refresh() : bool
+  {
+    return isset($this->options['refresh-libs']);
+  }
+
+  public function verbose() : bool
+  {
+    return isset($this->options['v']);
+  }
+
+  public function target() : ?string
+  {
+    return isset($this->options['target']) ? $this->options['target'] : null;
+  }
+
+  public function source() : ?string
+  {
+    return isset($this->options['source']) ? $this->options['source'] : null;
   }
 }
 
