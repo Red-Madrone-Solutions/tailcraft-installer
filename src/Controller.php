@@ -16,7 +16,7 @@ class Controller
       match (true) {
         $options->help() => (new Help)(),
         $options->setup() => (new Setup)(),
-        $options->list() => (new ListCommands)(),
+        $options->list() => (new ListCommands)($options),
       };
     } catch (\UnhandledMatchError $e) {
       // Default action
