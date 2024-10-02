@@ -9,15 +9,20 @@ class Options
   public function __construct()
   {
     $this->options = getopt(
-      'hsi:l::vb:',
+      'hsi:l::vb:d',
       [ 
         'help', 'setup', 'install:', 'list',
         'list:', 
         'source:', 'target:', 'refresh-libs',
-        'block:',
+        'block:', 'cpt:', 'taxonomy:',
         'force',
       ]
     );
+  }
+
+  public function dev() : bool
+  {
+    return isset($this->options['d']);
   }
 
   public function force() : bool
@@ -51,6 +56,26 @@ class Options
       ? $this->options['b'] 
       : $this->options['block']
     ;
+  }
+
+  public function installCpt() : bool
+  {
+    return isset($this->options['cpt']);
+  }
+
+  public function cpt() : string
+  {
+    return $this->options['cpt'];
+  }
+
+  public function installTaxonomy() : bool
+  {
+    return isset($this->options['taxonomy']);
+  }
+
+  public function taxonomy() : string
+  {
+    return $this->options['taxonomy'];
   }
 
   public function refresh() : bool
