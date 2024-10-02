@@ -63,7 +63,27 @@ class InstallBlock extends Base
       mkdir($target_dir);
     }
 
-    $rsync = new Rsync($source_dir, $target_dir);
+    $rsync = new Rsync(
+      source: $source_dir, 
+      destination: $target_dir,
+      excludes: [ 'acf-json' ],
+    );
     $rsync();
+
+    $block_acf_dir = $source_dir . '/acf-json/';
+    if ( is_dir($block_acf_dir) ) {
+      $target_acf_dir = $base_target_dir . '/acf-json/';
+
+      if ( !is_dir($target_acf_dir) ) {
+        mkdir($target_acf_dir);
+      }
+
+      // TODO use copy instead of rsync
+      $rsync = new Rsync(
+        source: $block_acf_dir,
+        destination: $target_acf_dir,
+      );
+      $rsync();
+    }
   }
 }
