@@ -5,6 +5,7 @@ namespace RMS\TailCraftInstaller\Commands;
 use function Laravel\Prompts\text;
 use function RMS\TailCraftInstaller\info;
 
+use RMS\TailCraftInstaller\Options;
 use RMS\TailCraftInstaller\Process\GitClone;
 use RMS\TailCraftInstaller\Util\TextReplace;
 
@@ -13,7 +14,7 @@ class Setup extends Base {
   protected string $theme_slug = '';
   protected string $tailcraft_repo = 'Red-Madrone-Solutions/tailcraft';
 
-  protected function run() : void
+  protected function run(?Options $options) : void
   {
     // TODO check if in theme folder or in WP install
     $this->getInfo();

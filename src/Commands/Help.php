@@ -2,10 +2,12 @@
 
 namespace RMS\TailCraftInstaller\Commands;
 
+use RMS\TailCraftInstaller\Options;
+
 use function RMS\TailCraftInstaller\info;
 
 class Help extends Base {
-  protected function run() : void
+  protected function run(?Options $options) : void
   {
     info('This is the installer for the TailCraft base theme');
     info('By default, it will setup a new WordPress theme with Tailwind and Alpine.js. If you already have a TailCraft-based theme setup, you can install ACF-based blocks for rapid theme setup.');
